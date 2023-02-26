@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 
+	"encoding/hex"
 	"github.com/oasisprotocol/oasis-core/go/storage/mkvs/node"
 	"github.com/oasisprotocol/oasis-core/go/storage/mkvs/syncer"
 )
@@ -34,6 +35,7 @@ func NewOverlay(inner KeyValueTree) OverlayTree {
 
 // Implements KeyValueTree.
 func (o *treeOverlay) Insert(ctx context.Context, key, value []byte) error {
+	fmt.Printf("oasishax: %p treeOverlay.Insert %s\n", o, hex.EncodeToString(key));
 	err := o.overlay.Insert(ctx, key, value)
 	if err != nil {
 		return err
