@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 
+	"encoding/hex"
 	"github.com/oasisprotocol/oasis-core/go/storage/mkvs/node"
 	"github.com/oasisprotocol/oasis-core/go/storage/mkvs/syncer"
 )
@@ -45,6 +46,7 @@ func (o *treeOverlay) Insert(ctx context.Context, key, value []byte) error {
 
 // Implements KeyValueTree.
 func (o *treeOverlay) Get(ctx context.Context, key []byte) ([]byte, error) {
+	fmt.Println("treeOverlay.Get: {}", hex.Dump(key));
 	// For dirty values, check the overlay.
 	if o.dirty[string(key)] {
 		return o.overlay.Get(ctx, key)
